@@ -10,7 +10,7 @@
 ;; Options manual - http://vimdoc.sourceforge.net/htmldoc/options.html
 ;; Let's start with some popular options
 ;; https://www.shortcutfoo.com/blog/top-50-vim-configuration-options/
-(evil-define-command frostyx/set (arg)
+(evil-define-command setoption (arg)
   (interactive "<a>")
 
   (let* ((split (split-string arg "="))
@@ -53,10 +53,11 @@
       ;; Unknown command
       (option (print "Unknown command")))))
 
-(evil-ex-define-cmd "frostyx/set" 'frostyx/set)
+(evil-ex-define-cmd "set" 'setoption)
+(evil-ex-define-cmd "setoption" 'setoption)
 
 (defun evil-set-option-initial-state (value)
-  (print "Set initial state"))
+  (evil-set-initial-state major-mode (intern value)))
 
 (defun evil-set-option-wrap (value)
   (setq truncate-lines value))
