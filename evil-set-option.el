@@ -50,6 +50,19 @@
       ("nonumber" (evil-set-option-number nil))
       ("colorcolumn" (evil-set-option-colorcolumn value))
 
+      ;; TODO set cursorline: Highlight the line currently under cursor.
+
+      ;; TODO set relativenumber: Show line number on the current line and
+      ;;      relative numbers on all other lines.
+
+      ;; TODO set title: Set the window’s title, reflecting the file currently
+      ;;      being edited.
+
+      ;; Code folding options
+      ;; TODO set foldmethod=indent: Fold based on indention levels.
+      ;; TODO set foldnestmax=3: Only fold up to three nested levels.
+      ;; TODO set nofoldenable: Disable folding by default.
+
       ;; Unknown command
       (option (print "Unknown command")))))
 
