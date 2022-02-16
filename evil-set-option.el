@@ -120,3 +120,6 @@
   (setq evil-auto-indent value)
   (define-key global-map (kbd "RET")
     (if value 'newline-and-indent 'newline)))
+
+;; TODO This hook after-change-major-mode-hook should execute evil-vimrc
+;; (or evilrc) function
