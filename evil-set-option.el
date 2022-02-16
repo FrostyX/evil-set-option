@@ -18,25 +18,39 @@
          (value (car (cdr split))))
 
     (pcase option
+      ;; There is a pre-existing implementation of the :set command used for
+      ;; setting the initial evil state for a buffer. If the value is
+      ;; recognized to be one of the states, fall back to the default
+      ;; implementation
       ((or "normal" "insert" "visual" "replace" "operator" "motion")
        (evil-set-option-initial-state option))
-      ("wrap" (evil-set-option-wrap t))
-      ("nowrap" (evil-set-option-wrap nil))
-      ("number" (evil-set-option-number t))
-      ("nonumber" (evil-set-option-number nil))
-      ("colorcolumn" (evil-set-option-colorcolumn value))
-      ("hlsearch" (evil-set-option-hlsearch t))
-      ("nohlsearch" (evil-set-option-hlsearch nil))
-      ("ignorecase" (evil-set-option-ignorecase t))
-      ("noignorecase" (evil-set-option-ignorecase nil))
-      ("incsearch" (evil-set-option-incsearch t))
-      ("noincsearch" (evil-set-option-incsearch nil))
+
+      ;; Indent options
       ("expandtab" (evil-set-option-expandtab t))
       ("noexpandtab" (evil-set-option-expandtab nil))
       ("shiftwidth" (evil-set-option-shiftwidth value))
       ("autoindent" (evil-set-option-autoindent t))
       ("noautoindent" (evil-set-option-autoindent nil))
       ("tabstop" (evil-set-option-tabstop value))
+
+      ;; Search options
+      ("hlsearch" (evil-set-option-hlsearch t))
+      ("nohlsearch" (evil-set-option-hlsearch nil))
+      ("ignorecase" (evil-set-option-ignorecase t))
+      ("noignorecase" (evil-set-option-ignorecase nil))
+      ("incsearch" (evil-set-option-incsearch t))
+      ("noincsearch" (evil-set-option-incsearch nil))
+
+      ;; Text rendering options
+      ("wrap" (evil-set-option-wrap t))
+      ("nowrap" (evil-set-option-wrap nil))
+
+      ;; User interface options
+      ("number" (evil-set-option-number t))
+      ("nonumber" (evil-set-option-number nil))
+      ("colorcolumn" (evil-set-option-colorcolumn value))
+
+      ;; Unknown command
       (option (print "Unknown command")))))
 
 (evil-ex-define-cmd "frostyx/set" 'frostyx/set)
@@ -91,4 +105,4 @@
 (defun evil-set-option-autoindent (value)
   (setq evil-auto-indent value)
   (define-key global-map (kbd "RET")
-	(if value 'newline-and-indent 'newline)))
+    (if value 'newline-and-indent 'newline)))
