@@ -1,0 +1,37 @@
+#+TITLE: evil-set-option
+
+Support for all the well-known, and easy-to-use ~:set~ commands, such
+as ~:set wrap~, ~:set number~, ~:set colorcolumn~, ~:set expandtab~,
+and more.
+
+** Installation
+
+The package is not available on MELPA yet, please use Quelpa (or your
+preferred package manager) to install.
+
+#+BEGIN_SRC emacs-lisp
+(use-package evil-set-option
+  :ensure t
+  :quelpa (evil-set-option
+           :fetcher github
+           :repo "FrostyX/evil-set-option"
+           :branch "main")
+  :config
+  (evil-set-option-mode))
+#+END_SRC
+
+** Usage
+
+The following colon commands, and many others become
+available. Running them will affect only the current buffer.
+
+#+BEGIN_EXAMPLE
+:set wrap
+:set number
+:set colorcolumn=80
+...
+#+END_EXAMPLE
+
+** Configuration
+
+TODO Explain how to make a .vimrc replacement
