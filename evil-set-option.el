@@ -31,6 +31,12 @@
       ("noignorecase" (evil-set-option-ignorecase nil))
       ("incsearch" (evil-set-option-incsearch t))
       ("noincsearch" (evil-set-option-incsearch nil))
+      ("expandtab" (evil-set-option-expandtab t))
+      ("noexpandtab" (evil-set-option-expandtab nil))
+      ("shiftwidth" (evil-set-option-shiftwidth value))
+      ("autoindent" (evil-set-option-autoindent t))
+      ("noautoindent" (evil-set-option-autoindent nil))
+      ("tabstop" (evil-set-option-tabstop value))
       (option (print "Unknown command")))))
 
 (evil-ex-define-cmd "frostyx/set" 'frostyx/set)
@@ -71,5 +77,18 @@
   ;; TODO Error only for disabling
   (print "There is no way to disable incsearch"))
 
+(defun evil-set-option-expandtab (value)
+  ;; FIXME Using tabs for >> and << doesn't work
+  (setq indent-tabs-mode (not value))
+  (setq evil-indent-convert-tabs value))
 
-evil-default-state
+(defun evil-set-option-shiftwidth (value)
+  (setq evil-shift-width (string-to-number value)))
+
+(defun evil-set-option-tabstop (value)
+  (setq tab-width (string-to-number value)))
+
+(defun evil-set-option-autoindent (value)
+  (setq evil-auto-indent value)
+  (define-key global-map (kbd "RET")
+	(if value 'newline-and-indent 'newline)))
