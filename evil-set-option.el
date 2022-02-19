@@ -58,9 +58,8 @@
       ;;      being edited.
 
       ;; Code folding options
-      ;; TODO set foldmethod=indent: Fold based on indention levels.
-      ;; TODO set foldnestmax=3: Only fold up to three nested levels.
-      ;; TODO set nofoldenable: Disable folding by default.
+      ("foldenable" (evil-set-option-foldenable t))
+      ("nofoldenable" (evil-set-option-foldenable nil))
 
       ;; Unknown command
       (option (print "Unknown command")))))
@@ -128,6 +127,12 @@
     (if value
         (hl-line-mode t)
       (hl-line-unload-function)))
+
+(defun evil-set-option-foldenable (value)
+  (hs-minor-mode value)
+  (if value
+      (hs-hide-all)
+    (hs-show-all)))
 
 ;; TODO This hook after-change-major-mode-hook should execute evil-vimrc
 ;; (or evilrc) function
