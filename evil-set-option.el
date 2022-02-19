@@ -59,7 +59,7 @@
       ("nofoldenable" (evil-set-option-foldenable nil))
 
       ;; Unknown command
-      (option (print "Unknown command")))))
+      (option (error "Unknown command")))))
 
 (evil-ex-define-cmd "set" 'setoption)
 (evil-ex-define-cmd "setoption" 'setoption)
@@ -102,7 +102,7 @@
 
 (defun evil-set-option-incsearch (value)
   ;; TODO Error only for disabling
-  (print "There is no way to disable incsearch"))
+  (error "There is no way to disable incsearch"))
 
 (defun evil-set-option-expandtab (value)
   ;; FIXME Using tabs for >> and << doesn't work
