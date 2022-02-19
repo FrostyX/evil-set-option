@@ -49,8 +49,8 @@
       ("number" (evil-set-option-number t))
       ("nonumber" (evil-set-option-number nil))
       ("colorcolumn" (evil-set-option-colorcolumn value))
-
-      ;; TODO set cursorline: Highlight the line currently under cursor.
+      ("cursorline" (evil-set-option-cursorline t))
+      ("nocursorline" (evil-set-option-cursorline nil))
 
       ;; TODO set relativenumber: Show line number on the current line and
       ;;      relative numbers on all other lines.
@@ -120,6 +120,11 @@
   (setq evil-auto-indent value)
   (define-key global-map (kbd "RET")
     (if value 'newline-and-indent 'newline)))
+
+(defun evil-set-option-cursorline (value)
+    (if value
+        (hl-line-mode t)
+      (hl-line-unload-function)))
 
 ;; TODO This hook after-change-major-mode-hook should execute evil-vimrc
 ;; (or evilrc) function
