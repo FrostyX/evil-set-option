@@ -48,12 +48,11 @@
       ;; User interface options
       ("number" (evil-set-option-number t))
       ("nonumber" (evil-set-option-number nil))
+      ("relativenumber" (evil-set-option-relativenumber t))
+      ("norelativenumber" (evil-set-option-relativenumber nil))
       ("colorcolumn" (evil-set-option-colorcolumn value))
       ("cursorline" (evil-set-option-cursorline t))
       ("nocursorline" (evil-set-option-cursorline nil))
-
-      ;; TODO set relativenumber: Show line number on the current line and
-      ;;      relative numbers on all other lines.
 
       ;; TODO set title: Set the window’s title, reflecting the file currently
       ;;      being edited.
@@ -76,7 +75,11 @@
   (setq truncate-lines value))
 
 (defun evil-set-option-number (value)
+  (display-line-numbers-mode (if value 1 0))
   (setq display-line-numbers value))
+
+(defun evil-set-option-relativenumber (value)
+  (setq display-line-numbers (if value 'relative t)))
 
 (defun evil-set-option-colorcolumn (value)
   (if (not (string-empty-p value))
