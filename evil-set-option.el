@@ -54,9 +54,6 @@
       ("cursorline" (evil-set-option-cursorline t))
       ("nocursorline" (evil-set-option-cursorline nil))
 
-      ;; TODO set title: Set the window’s title, reflecting the file currently
-      ;;      being edited.
-
       ;; Code folding options
       ("foldenable" (evil-set-option-foldenable t))
       ("nofoldenable" (evil-set-option-foldenable nil))
