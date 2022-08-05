@@ -1,3 +1,30 @@
+;;; evil-set-option.el --- Support for :set wrap, :set number, and more    -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2022  Jakub Kadlčík
+
+;; Author: Jakub Kadlčík <frostyx@email.cz>
+;; URL: https://github.com/FrostyX/evil-set-option
+;; Version: 0.1-pre
+;; Package-Requires: ((emacs "26.3"))
+;; Keywords: evil, set, option
+
+;;; License:
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+;;; Commentary:
+
 ;; My primitive implementation of :set command for Evil.
 ;; It allows you to run e.g.
 ;;    :set wrap
@@ -5,11 +32,32 @@
 ;; etc, that we know from Vim.
 ;;
 ;; Currently, only a very limited subset of options is supported - only
-;; those that I use regularly.
+;; those that I use regularly. Please let me know what should be added.
 ;;
-;; Options manual - http://vimdoc.sourceforge.net/htmldoc/options.html
-;; Let's start with some popular options
+;;
+;; Options manual:
+;; http://vimdoc.sourceforge.net/htmldoc/options.html
+
+;; Some popular options:
 ;; https://www.shortcutfoo.com/blog/top-50-vim-configuration-options/
+
+
+;;; Code
+
+;;;; Modes
+
+(define-minor-mode evil-set-option-mode
+  "Toggle `evil-set-option-mode'.
+This global minor mode overrides the default `:set' ex
+command and provides support for many options, such as
+`:set wrap', `:set number', `:set colorcolumn', etc. "
+  :global t
+  (if evil-set-option-mode
+      (evil-ex-define-cmd "set" 'setoption)
+    (setq evil-ex-commands (assoc-delete-all "set" evil-ex-commands))))
+
+;;;; Commands
+
 (evil-define-command setoption (arg)
   (interactive "<a>")
 
@@ -64,15 +112,9 @@
       ;; Unknown command
       (option (error "Unknown command")))))
 
-(define-minor-mode evil-set-option-mode
-  "Toggle `evil-set-option-mode'.
-This global minor mode overrides the default `:set' ex
-command and provides support for many options, such as
-`:set wrap', `:set number', `:set colorcolumn', etc. "
-  :global t
-  (if evil-set-option-mode
-      (evil-ex-define-cmd "set" 'setoption)
-    (setq evil-ex-commands (assoc-delete-all "set" evil-ex-commands))))
+;;;; Functions
+
+;;;;; Public
 
 (defun evil-set-option-initial-state (value)
   (evil-set-initial-state major-mode (intern value)))
@@ -147,5 +189,8 @@ command and provides support for many options, such as
       (hs-hide-all)
     (hs-show-all)))
 
-;; TODO This hook after-change-major-mode-hook should execute evil-vimrc
-;; (or evilrc) function
+;;;; Footer
+
+(provide 'evil-set-option)
+
+;;; evil-set-option.el ends here
