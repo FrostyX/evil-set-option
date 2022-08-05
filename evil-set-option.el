@@ -112,6 +112,7 @@
 
 (defun evil-set-option-expandtab (value)
   ;; FIXME Using tabs for >> and << doesn't work
+  ;; https://github.com/FrostyX/evil-set-option/issues/2
   (setq indent-tabs-mode (not value))
   (setq evil-indent-convert-tabs value))
 
