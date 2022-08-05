@@ -121,7 +121,7 @@
 
 (defun evil-set-option-autoindent (value)
   (setq evil-auto-indent value)
-  (define-key global-map (kbd "RET")
+  (local-set-key (kbd "RET")
     (if value 'newline-and-indent 'newline)))
 
 (defun evil-set-option-cursorline (value)
