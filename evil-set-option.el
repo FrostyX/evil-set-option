@@ -13,6 +13,9 @@
 (evil-define-command setoption (arg)
   (interactive "<a>")
 
+  (if (not arg)
+      (error "Missing argument, use e.g. :set wrap"))
+
   (let* ((split (split-string arg "="))
          (option (car split))
          (value (car (cdr split))))
