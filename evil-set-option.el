@@ -64,8 +64,15 @@
       ;; Unknown command
       (option (error "Unknown command")))))
 
-(evil-ex-define-cmd "set" 'setoption)
-(evil-ex-define-cmd "setoption" 'setoption)
+(define-minor-mode evil-set-option-mode
+  "Toggle `evil-set-option-mode'.
+This global minor mode overrides the default `:set' ex
+command and provides support for many options, such as
+`:set wrap', `:set number', `:set colorcolumn', etc. "
+  :global t
+  (if evil-set-option-mode
+      (evil-ex-define-cmd "set" 'setoption)
+    (setq evil-ex-commands (assoc-delete-all "set" evil-ex-commands))))
 
 (defun evil-set-option-initial-state (value)
   (evil-set-initial-state major-mode (intern value)))
