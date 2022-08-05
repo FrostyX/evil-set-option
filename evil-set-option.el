@@ -105,8 +105,8 @@
   (setq evil-search-module 'evil-search))
 
 (defun evil-set-option-incsearch (value)
-  ;; TODO Error only for disabling
-  (error "There is no way to disable incsearch"))
+  (if (not value)
+      (error "There is no way to disable incsearch")))
 
 (defun evil-set-option-expandtab (value)
   ;; FIXME Using tabs for >> and << doesn't work
