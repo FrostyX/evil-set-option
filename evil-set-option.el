@@ -88,12 +88,11 @@
     (turn-off-fci-mode)))
 
 (defun evil-set-option-hlsearch (value)
+  ;; In Vim, this option is global, therefore we should ideally use
+  ;;     (global-evil-search-highlight-persist t)
+  ;; But IMHO it doesn't work. Thus, I am implementing this option per-buffer
   (if (fboundp 'evil-search-highlight-persist)
-      (progn
-        (global-evil-search-highlight-persist t)
-        (if value
-            (turn-on-search-highlight-persist)
-          (turn-off-search-highlight-persist)))
+      (evil-search-highlight-persist (if value t -1))
     (error "Install `evil-search-highlight-persist' package")))
 
 (defun evil-set-option-ignorecase (value)
