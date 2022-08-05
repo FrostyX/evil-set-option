@@ -71,7 +71,7 @@
   (evil-set-initial-state major-mode (intern value)))
 
 (defun evil-set-option-wrap (value)
-  (setq truncate-lines value))
+  (setq truncate-lines (not value)))
 
 (defun evil-set-option-number (value)
   (display-line-numbers-mode (if value 1 0))
