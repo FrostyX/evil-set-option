@@ -88,12 +88,13 @@
     (turn-off-fci-mode)))
 
 (defun evil-set-option-hlsearch (value)
-  ;; Requires https://melpa.org/#/evil-search-highlight-persist
-  ;; TODO Add check that the package is available
-  (global-evil-search-highlight-persist t)
-  (if value
-      (turn-on-search-highlight-persist)
-    (turn-off-search-highlight-persist)))
+  (if (fboundp 'evil-search-highlight-persist)
+      (progn
+        (global-evil-search-highlight-persist t)
+        (if value
+            (turn-on-search-highlight-persist)
+          (turn-off-search-highlight-persist)))
+    (error "Install `evil-search-highlight-persist' package")))
 
 (defun evil-set-option-ignorecase (value)
   ;; FIXME Nothing works for not-ignoring case
