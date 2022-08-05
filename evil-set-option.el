@@ -96,12 +96,15 @@
     (error "Install `evil-search-highlight-persist' package")))
 
 (defun evil-set-option-ignorecase (value)
-  ;; FIXME Nothing works for not-ignoring case
-  (setq case-fold-search nil)
-  (setq case-fold-search t)
-  (setq evil-ex-search-case nil)
-  (setq isearch-case-fold-search t)
-  (setq evil-search-module 'evil-search))
+  (if value
+      (progn
+        (setq case-fold-search nil)
+        (setq case-fold-search t)
+        (setq evil-ex-search-case nil)
+        (setq isearch-case-fold-search t)
+        (setq evil-search-module 'evil-search))
+    (error (concat "Please let me know how to implement this option - "
+                   "https://github.com/FrostyX/evil-set-option/issues/1"))))
 
 (defun evil-set-option-incsearch (value)
   (if (not value)
