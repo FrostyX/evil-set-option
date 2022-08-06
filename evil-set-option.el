@@ -65,7 +65,7 @@ command and provides support for many options, such as
 
 ;;;; Commands
 
-;;;###autoload
+;;;###autoload (autoload 'evil-set-option "evil-set-option" nil t)
 (evil-define-command evil-set-option (arg)
   (interactive "<a>")
 
