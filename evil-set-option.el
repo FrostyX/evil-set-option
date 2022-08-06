@@ -1,4 +1,4 @@
-;;; evil-set-option.el --- Support for :set wrap, :set number, and more    -*- lexical-binding: t; -*-
+;;; evil-set-option.el --- Support for :set wrap, :set number, and more
 
 ;; Copyright (C) 2022  Jakub Kadlčík
 
@@ -47,6 +47,9 @@
 ;;;; Requirements
 
 (require 'evil)
+(require 'hideshow)
+(require 'hl-line)
+(require 'fill-column-indicator)
 
 ;;;; Modes
 
