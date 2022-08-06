@@ -60,8 +60,8 @@ command and provides support for many options, such as
 `:set wrap', `:set number', `:set colorcolumn', etc. "
   :global t
   (if evil-set-option-mode
-      (evil-ex-define-cmd "set" #'evil-set-option))
-    (setq evil-ex-commands (assoc-delete-all "set" evil-ex-commands)))
+      (evil-ex-define-cmd "set" 'evil-set-option)
+    (setq evil-ex-commands (assoc-delete-all "set" evil-ex-commands))))
 
 ;;;; Commands
 
