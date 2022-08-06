@@ -187,9 +187,9 @@ command and provides support for many options, such as
     (if value 'newline-and-indent 'newline)))
 
 (defun evil-set-option-cursorline (value)
-    (if value
-        (hl-line-mode t)
-      (hl-line-unload-function)))
+  (if value
+      (hl-line-mode t)
+    (hl-line-unload-function)))
 
 (defun evil-set-option-foldenable (value)
   (hs-minor-mode value)
