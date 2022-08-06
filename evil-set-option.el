@@ -4,7 +4,7 @@
 
 ;; Author: Jakub Kadlčík <frostyx@email.cz>
 ;; URL: https://github.com/FrostyX/evil-set-option
-;; Version: 0.1-pre
+;; Version: 0.1
 ;; Package-Requires: ((emacs "26.3"))
 ;; Keywords: evil, set, option
 
@@ -44,6 +44,10 @@
 
 ;;; Code
 
+;;;; Requirements
+
+(require 'evil)
+
 ;;;; Modes
 
 (define-minor-mode evil-set-option-mode
@@ -53,68 +57,69 @@ command and provides support for many options, such as
 `:set wrap', `:set number', `:set colorcolumn', etc. "
   :global t
   (if evil-set-option-mode
-      (evil-ex-define-cmd "set" 'setoption)
-    (setq evil-ex-commands (assoc-delete-all "set" evil-ex-commands))))
+      (evil-ex-define-cmd "set" #'evil-set-option))
+    (setq evil-ex-commands (assoc-delete-all "set" evil-ex-commands)))
 
 ;;;; Commands
 
-(evil-define-command setoption (arg)
+;;;###autoload
+(evil-define-command evil-set-option (arg)
   (interactive "<a>")
 
   (if (not arg)
-      (error "Missing argument, use e.g. :set wrap"))
+      (error "Missing argument, use e.g. :set wrap")
 
-  (let* ((split (split-string arg "="))
-         (option (car split))
-         (value (car (cdr split))))
+    (let* ((split (split-string arg "="))
+           (option (car split))
+           (value (car (cdr split))))
 
-    (pcase option
-      ;; There is a pre-existing implementation of the :set command used for
-      ;; setting the initial evil state for a buffer. If the value is
-      ;; recognized to be one of the states, fall back to the default
-      ;; implementation
-      ((or "normal" "insert" "visual" "replace" "operator" "motion")
-       (evil-set-option-initial-state option))
+      (pcase option
+        ;; There is a pre-existing implementation of the :set command used for
+        ;; setting the initial evil state for a buffer. If the value is
+        ;; recognized to be one of the states, fall back to the default
+        ;; implementation
+        ((or "normal" "insert" "visual" "replace" "operator" "motion")
+         (evil-set-option-initial-state option))
 
-      ;; Indent options
-      ("expandtab" (evil-set-option-expandtab t))
-      ("noexpandtab" (evil-set-option-expandtab nil))
-      ("shiftwidth" (evil-set-option-shiftwidth value))
-      ("autoindent" (evil-set-option-autoindent t))
-      ("noautoindent" (evil-set-option-autoindent nil))
-      ("tabstop" (evil-set-option-tabstop value))
+        ;; Indent options
+        ("expandtab" (evil-set-option-expandtab t))
+        ("noexpandtab" (evil-set-option-expandtab nil))
+        ("shiftwidth" (evil-set-option-shiftwidth value))
+        ("autoindent" (evil-set-option-autoindent t))
+        ("noautoindent" (evil-set-option-autoindent nil))
+        ("tabstop" (evil-set-option-tabstop value))
 
-      ;; Search options
-      ("hlsearch" (evil-set-option-hlsearch t))
-      ("nohlsearch" (evil-set-option-hlsearch nil))
-      ("ignorecase" (evil-set-option-ignorecase t))
-      ("noignorecase" (evil-set-option-ignorecase nil))
-      ("incsearch" (evil-set-option-incsearch t))
-      ("noincsearch" (evil-set-option-incsearch nil))
+        ;; Search options
+        ("hlsearch" (evil-set-option-hlsearch t))
+        ("nohlsearch" (evil-set-option-hlsearch nil))
+        ("ignorecase" (evil-set-option-ignorecase t))
+        ("noignorecase" (evil-set-option-ignorecase nil))
+        ("incsearch" (evil-set-option-incsearch t))
+        ("noincsearch" (evil-set-option-incsearch nil))
 
-      ;; Text rendering options
-      ("wrap" (evil-set-option-wrap t))
-      ("nowrap" (evil-set-option-wrap nil))
+        ;; Text rendering options
+        ("wrap" (evil-set-option-wrap t))
+        ("nowrap" (evil-set-option-wrap nil))
 
-      ;; User interface options
-      ("number" (evil-set-option-number t))
-      ("nonumber" (evil-set-option-number nil))
-      ("relativenumber" (evil-set-option-relativenumber t))
-      ("norelativenumber" (evil-set-option-relativenumber nil))
-      ("colorcolumn" (evil-set-option-colorcolumn value))
-      ("cursorline" (evil-set-option-cursorline t))
-      ("nocursorline" (evil-set-option-cursorline nil))
+        ;; User interface options
+        ("number" (evil-set-option-number t))
+        ("nonumber" (evil-set-option-number nil))
+        ("relativenumber" (evil-set-option-relativenumber t))
+        ("norelativenumber" (evil-set-option-relativenumber nil))
+        ("colorcolumn" (evil-set-option-colorcolumn value))
+        ("cursorline" (evil-set-option-cursorline t))
+        ("nocursorline" (evil-set-option-cursorline nil))
 
-      ;; Code folding options
-      ("foldenable" (evil-set-option-foldenable t))
-      ("nofoldenable" (evil-set-option-foldenable nil))
+        ;; Code folding options
+        ("foldenable" (evil-set-option-foldenable t))
+        ("nofoldenable" (evil-set-option-foldenable nil))
 
-      ;; Unknown command
-      (option (error "Unknown command")))))
+        ;; Unknown command
+        (option (error "Unknown command"))))))
 
-;;;; Functions
+;; ;;;; Functions
 
-;;;;; Public
+;; ;;;;; Public
 
 (defun evil-set-option-initial-state (value)
   (evil-set-initial-state major-mode (intern value)))
