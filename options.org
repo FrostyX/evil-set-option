@@ -1,6 +1,14 @@
 #+TITLE: Options
 
+All Vim options can be found in the documentation
+http://vimdoc.sourceforge.net/htmldoc/quickref.html#option-list
+
+As a backup, we have a copy in this repository
+https://github.com/FrostyX/evil-set-option/blob/main/vim-options.txt
+
 ** Supported options
+
+A list of currently supported options.
 
 | expandtab      | use spaces when <Tab> is inserted               |
 | shiftwidth     | number of spaces to use for (auto)indent step   |
