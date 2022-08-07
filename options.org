@@ -15,4 +15,3 @@
 | colorcolumn    | columns to highlight                            |
 | cursorline     | highlight the screen line of the cursor         |
 | foldenable     | set to display all folds open                   |
-|                |                                                 |
