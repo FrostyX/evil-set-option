@@ -32,6 +32,6 @@ available. Running them will affect only the current buffer.
 ...
 #+END_EXAMPLE
 
-** Configuration
+** Read more
 
-TODO Explain how to make a .vimrc replacement
+- http://frostyx.cz/posts/emacs-evil-set-option
