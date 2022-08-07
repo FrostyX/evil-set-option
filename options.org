@@ -1,0 +1,18 @@
+#+TITLE: Options
+
+** Supported options
+
+| expandtab      | use spaces when <Tab> is inserted               |
+| shiftwidth     | number of spaces to use for (auto)indent step   |
+| autoindent     | take indent for new line from previous line     |
+| tabstop        | number of spaces that <Tab> in file uses        |
+| hlsearch       | highlight matches with last search pattern      |
+| ignorecase     | ignore case in search patterns                  |
+| incsearch      | highlight match while typing search pattern     |
+| wrap           | long lines wrap and continue on the next line   |
+| number         | print the line number in front of each line     |
+| relativenumber | show relative line number in front of each line |
+| colorcolumn    | columns to highlight                            |
+| cursorline     | highlight the screen line of the cursor         |
+| foldenable     | set to display all folds open                   |
+|                |                                                 |
