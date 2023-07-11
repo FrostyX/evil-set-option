@@ -4,6 +4,8 @@ Support for all the well-known, and easy-to-use ~:set~ commands, such
 as ~:set wrap~, ~:set number~, ~:set colorcolumn~, ~:set expandtab~,
 and more.
 
+You can see it in action in [[https://www.youtube.com/watch?v=lLOt97R6shg][this short video]].
+
 ** Installation
 
 The package is not available on MELPA yet, please use Quelpa (or your
