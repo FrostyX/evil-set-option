@@ -5,7 +5,7 @@
 ;; Author: Jakub Kadlčík <frostyx@email.cz>
 ;; URL: https://github.com/FrostyX/evil-set-option
 ;; Version: 0.1
-;; Package-Requires: ((emacs "26.3"))
+;; Package-Requires: ((emacs "27.0"))
 ;; Keywords: evil, set, option
 
 ;;; License:
@@ -49,7 +49,7 @@
 (require 'evil)
 (require 'hideshow)
 (require 'hl-line)
-(require 'fill-column-indicator)
+(require 'display-fill-column-indicator)
 
 ;;;; Modes
 
@@ -140,9 +140,9 @@ command and provides support for many options, such as
 (defun evil-set-option-colorcolumn (value)
   (if (not (string-empty-p value))
       (progn
-        (turn-on-fci-mode)
+        (display-fill-column-indicator-mode 1)
         (set-fill-column (string-to-number value)))
-    (turn-off-fci-mode)))
+    (display-fill-column-indicator-mode 0)))
 
 (defun evil-set-option-hlsearch (value)
   ;; In Vim, this option is global, therefore we should ideally use
